@@ -39,6 +39,6 @@
 <h4>Second step</h4>
 <p>Access this 2 pages:</p>
 <ul>
-  <li><a href="https://v-coyote.github.io/Incodde/T2/desafio-node1/frontend/index.html">Register</a></li>
-  <li><a href="https://v-coyote.github.io/Incodde/T2/desafio-node1/frontend/list.html">User List</a></li>
+  <li><a href="https://v-coyote.github.io/Challenge-NodeJS-Incodde/frontend/index.html">Register</a></li>
+  <li><a href="https://v-coyote.github.io/Challenge-NodeJS-Incodde/frontend/list.html">User List</a></li>
 </ul>
