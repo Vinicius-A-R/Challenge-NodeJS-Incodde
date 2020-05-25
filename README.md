@@ -41,5 +41,4 @@
 <ul>
   <li><a href="https://v-coyote.github.io/Incodde/T2/desafio-node1/frontend/index.html">Register</a></li>
   <li><a href="https://v-coyote.github.io/Incodde/T2/desafio-node1/frontend/list.html">User List</a></li>
-  <li>~/frontend/list.html</li>
 </ul>
