@@ -23,14 +23,13 @@
 <h4>First: </h4>
 <p>Install NodeJS and start the backend</p>
 <ul>
-  <li>Inside backend folder run: </li>
+  <p>Inside backend folder run: </p>
   <li>npm install</li>
   <li>npm run dev</li>
 </ul>
 <strong>or</strong>
 <ul>
   <p>Inside backend folder run: </p>
-  <li></li>
   <li>yarn install</li>
   <li>yarn dev</li>
 </ul>
