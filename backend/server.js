@@ -1,36 +1,35 @@
 const express = require('express');
+const routes = require('./routes');
+const path = require('path');
 const cors = require('cors');
 
-const userController = require('./controllers/userController');
 const host = 'http://localhost:';
 const port = 5000;
+const portDB = 27017;
 
-const server = express();
+const app = express();
 
-const corsOptions = {
-  origin: `${host}${port}/users`,
-};
+//local database
+const mongoose = require('mongoose');
+const uri = `mongodb://localhost:${portDB}/?readPreference=primary&appname=MongoDB%20Compass&ssl=false`;
 
-// server.use(cors(corsOptions));
-server.use(cors());
-server.use(express.json());
+// error when connect mongodb atlas
+// const uri = `mongodb+srv://v-coyote:<Test@123>@v-coyote-apjsd.gcp.mongodb.net/test?retryWrites=true&w=majority`;
 
-server.get('/users', userController.getAllUsers);
+mongoose
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('MongoDB Connected...'))
+  .catch((err) => console.log(err));
 
-server.get(
-  '/users/:index',
-  userController.checkUserInArray,
-  userController.getOneUser
-);
+app.use(cors());
+routes.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, '../frontend/')));
+app.use(routes);
 
-server.post('/users', userController.checkUserExists, userController.newUser);
-
-server.delete(
-  '/users/:index',
-  userController.checkUserInArray,
-  userController.deleteUser
-);
-
-server.listen(port, () => {
-  console.log(`Access server: ${host}${port}`);
+app.listen(port, () => {
+  console.log(`Access server: ${host}${port}/index.html`);
 });

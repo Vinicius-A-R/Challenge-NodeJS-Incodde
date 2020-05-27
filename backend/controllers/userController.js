@@ -1,63 +1,71 @@
 const users = require('../database/index');
+const User = require('../models/User');
 
-function checkUserExists(req, res, next) {
+const checkUserExists = async (req, res, next) => {
   //check if there is anything inside the body
-  if (!req.body.name && !req.body.email) {
+  if (!req.body.username || !req.body.email) {
     return res.status(400).send({ error: 'User and email is required!' });
   }
 
   const { name, email } = req.body;
 
-  const checkName = users.filter((user) => user.name === name)[0];
-  const checkEmail = users.filter((user) => user.email === email)[0];
+  const checkName = await User.findOne({ username: name });
+  const checkEmail = await User.findOne({ email: email });
 
-  if (!checkName && !checkEmail) {
-    return next();
+  if (checkName || checkEmail) {
+    return res.status(400).send({ error: 'User or email already exists!' });
   }
 
-  return res.status(400).send({ error: 'User or email already exists!' });
-}
+  return next();
+};
 
-function checkUserInArray(req, res, next) {
-  const user = users[req.params.index];
-  console.log(user);
+const checkUserInArray = async (req, res, next) => {
+  const { id } = req.params;
+  const user = await User.findOne(id);
+  // const user = User.findById(id);
+
   if (!user) {
     return res.status(400).send({ error: 'User does not exists!' });
   }
 
   return next();
-}
-
-const getAllUsers = (req, res) => {
-  return res.json(users);
 };
 
-const getOneUser = (req, res) => {
-  const { index } = req.params;
-
-  return res.json(users[index]);
-};
-
-const newUser = (req, res) => {
-  const { name, email } = req.body;
-
-  const id = Date.now();
-  users.push({
-    id,
-    name,
-    email,
-  });
+const getAllUsers = async (req, res) => {
+  const users = await User.find();
 
   return res.json(users);
 };
 
-const deleteUser = (req, res) => {
+const getOneUser = async (req, res) => {
   const { index } = req.params;
-  if (!users[index]) {
+  const user = await User.findById(index);
+
+  return res.json(user);
+};
+
+const newUser = async (req, res) => {
+  const { username, email } = req.body;
+
+  const newUser = {};
+  newUser.username = username;
+  newUser.email = email;
+
+  const user = await User.create(newUser);
+
+  return res.json(user);
+};
+
+const deleteUser = async (req, res) => {
+  const { index } = req.params;
+  const user = await User.findById(index);
+
+  if (!user) {
     return res.status(400).send({ error: 'User does not exists!' });
   }
 
-  users.splice(index, 1);
+  // users.splice(index, 1);
+  await User.findByIdAndDelete(index);
 
   return res.status(204).send({ message: 'User was deleted' });
 };
