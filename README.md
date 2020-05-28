@@ -41,6 +41,6 @@
 <h4>Second step</h4>
 <p>Access this 2 pages:</p>
 <ul>
-  <li><a href="https://v-coyote.github.io/Challenge-NodeJS-Incodde/frontend/index.html">Register</a></li>
-  <li><a href="https://v-coyote.github.io/Challenge-NodeJS-Incodde/frontend/list.html">User List</a></li>
+  <li><a href="http://localhost:5000/index.html">http://localhost:5000/index.html</a></li>
+  <li><a href="http://localhost:5000/list.html">http://localhost:5000/list.html</a></li>
 </ul>
