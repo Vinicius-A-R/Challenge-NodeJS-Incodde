@@ -58,8 +58,19 @@ thead {
 thead tr {
   width: 100%;
   padding: 8px;
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+thead tr th {
+  width: 100%;
+  display: grid;
+  justify-items: start;
+  padding-left: 80px;
+}
+
+thead tr th:last-child {
+  padding-left: 16px;
 }
 
 tbody {
@@ -69,11 +80,35 @@ tbody {
 
 tbody tr {
   width: 100%;
-  padding: 8px;
-  display: flex;
-  justify-content: space-around;
+  padding: 12px;
+
+  display: grid;
+  grid-template-columns: 80px 40% auto;
+}
+
+td a i:first-child:active {
+  transform: scale(1.5);
 }
 
 tbody tr:nth-child(even) {
   background-color: #c4c4c4;
+}
+
+.btnDelete {
+  display: inline-block;
+  position: relative;
+  padding-right: 16px;
+}
+
+td i {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  color: red;
+  cursor: pointer;
+}
+
+.btnEdit i {
+  color: #222;
 }

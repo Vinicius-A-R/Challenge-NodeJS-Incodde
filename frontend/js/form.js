@@ -29,9 +29,10 @@ const submit = (e) => {
   e.preventDefault();
 
   const user = {
-    name: nameInput.value,
+    username: nameInput.value,
     email: emailInput.value,
   };
+
   post(user);
   e.target.reset();
 };
