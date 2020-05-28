@@ -6,16 +6,21 @@ const routes = express.Router();
 routes.get('/users', userController.getAllUsers);
 
 routes.get(
-  '/users/:index',
+  '/users/:id',
   userController.checkUserInArray,
   userController.getOneUser
 );
 
 routes.post('/users', userController.checkUserExists, userController.newUser);
-// routes.post('/users', userController.newUser);
+
+routes.put(
+  '/users/:id',
+  userController.checkUserInArray,
+  userController.changeUser
+);
 
 routes.delete(
-  '/users/:index',
+  '/users/:id',
   userController.checkUserInArray,
   userController.deleteUser
 );
