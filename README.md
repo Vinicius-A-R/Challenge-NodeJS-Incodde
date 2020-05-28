@@ -18,6 +18,10 @@
   Create a simple HTML page to list the users from your backend
 </h4>
 
+<h4>
+  Associate Database MongoDB with backend NodeJS and show the database on the frontend  
+</h4>
+
 <h2>How to start</h2>
 
 <h4>First: </h4>
