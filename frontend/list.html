@@ -20,6 +20,9 @@
 
   <body>
     <header>
+      <div class="button-back">
+        <a href="./index.html">Back</a>
+      </div>
       <span>User List</span>
     </header>
     <main>
@@ -31,6 +34,29 @@
         <tbody id="tbody"></tbody>
       </table>
     </main>
+
+    <section class="modal">
+      <form class="form">
+        <div id="close">
+          <i class="fas fa-times"></i>
+        </div>
+        <header>
+          <span>Edit User</span>
+        </header>
+        <div class="change-data">
+          <label>Name:</label>
+          <input id="name" type="text" autofocus />
+        </div>
+
+        <div class="change-data">
+          <label>E-mail:</label>
+          <input id="email" type="text" />
+        </div>
+
+        <button id="submit-button">Submit</button>
+      </form>
+    </section>
+
     <script type="application/javascript" src="/js/list.js"></script>
   </body>
 </html>

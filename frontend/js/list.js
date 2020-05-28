@@ -1,5 +1,7 @@
 const host = 'http://localhost:5000';
 
+//-----------LIST-------------------
+
 const getAllUsers = (users) => {
   fetch(`${host}/users`)
     .then((res) => res.json())
@@ -47,6 +49,8 @@ const fillTable = (users) => {
 
 getAllUsers();
 
+//-----------REMOVE-------------------
+
 const removeUser = (id) => {
   fetch(`${host}/users/${id}`, {
     method: 'DELETE',
@@ -59,3 +63,63 @@ const removeRow = (id) => {
   const row = document.getElementById(`${id}`);
   row.parentNode.removeChild(row);
 };
+
+//-----------UPDATE------------------------
+
+const modal = document.querySelector('.modal');
+let idUser = '';
+
+const changeUser = (id) => {
+  modal.style = `display: flex;`;
+  idUser = id;
+};
+
+const close = document.querySelector('#close');
+close.addEventListener('click', () => {
+  modal.style = 'display: none';
+});
+
+const form = document.querySelector('.form');
+const inputName = document.querySelector('#name');
+const inputEmail = document.querySelector('#email');
+const button = document.querySelector('#submit-button');
+
+const put = (id, userUpdate) => {
+  fetch(`${host}/users/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(userUpdate),
+  })
+    .then((resp) => {
+      if (!resp.ok) {
+        throw resp;
+      }
+    })
+    .then((data) => {
+      changeUser('none');
+      alert('Your account have been successfully updated!');
+      updateList();
+    });
+};
+
+const submit = (e) => {
+  e.preventDefault();
+
+  const userUpdate = {
+    username: inputName.value,
+    email: inputEmail.value,
+  };
+
+  if (idUser !== '') {
+    put(idUser, userUpdate);
+    e.target.reset();
+  } else {
+    alert('User not exists!');
+  }
+};
+
+function updateList() {
+  location.reload();
+}
+
+form.addEventListener('submit', submit);
